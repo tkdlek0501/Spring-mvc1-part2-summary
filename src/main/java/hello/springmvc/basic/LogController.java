@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+//TODO: log 사용법
 //로거는 slf4j 인터페이스를 사용하고 구현체로는 Logback 선택
 @Slf4j
 @RestController // return 시에 String을 반환할 때 String 그대로 반환됨(HTTP 메시지 바디에 바로 입력됨) <-> @Controller 사용 시에는 String으로 반환하면 View를 가져오게 됨 

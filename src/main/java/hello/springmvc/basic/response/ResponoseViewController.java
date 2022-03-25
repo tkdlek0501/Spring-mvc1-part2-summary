@@ -2,7 +2,9 @@ package hello.springmvc.basic.response;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 // view를 return
@@ -13,12 +15,14 @@ public class ResponoseViewController {
 	// spring.thymeleaf.prefix=classpath:/templates/
 	// spring.thymeleaf.suffix=.html
 	
-	// 이렇게 사용하자!
+	//TODO: view, model 반환 방법
+	// 반환타입 String과 Model 을 사용하자!
 	@RequestMapping("/response-view-v2")
 	public String resposneViewV2(Model model) {
 		model.addAttribute("data", "hello!");
 		return "response/hello";
 	}
+	// String으로 반환하지만 thymeleaf를 사용함으로써 view를 반환/ model에 data를 담아서 응답
 	
 	// ------------------------------------------------------------------------------------------
 	
@@ -32,5 +36,13 @@ public class ResponoseViewController {
 	@RequestMapping("/response/hello")
 	public void resposneViewV3(Model model) {
 		model.addAttribute("data", "hello!");
+	}
+	
+	// 원래 내가 쓰던 방법 (ModelAndView 사용) -> ModelAndView에 model과 view 모두 담아서 가장 명시적이라고 생각했음
+	@GetMapping("myResponseMethod")
+	public ModelAndView myResponseMethod(ModelAndView mv, @RequestParam("param") String param) {
+		mv.setViewName("response/hello");
+		mv.addObject("data", "hello!");
+		return mv;
 	}
 }
